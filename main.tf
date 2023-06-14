@@ -5,18 +5,18 @@ provider "aws" {
 }
 
 resource "aws_instance" "centos_instance" {
-  ami           = "ami-xxxxxxxx"
+  ami           = "" #ami name
   instance_type = "t2.micro"
-  key_name      = "your-key-pair-name"
+  key_name      = ""  #keypair
   tags = {
     Name = "c8.local"
   }
 }
 
 resource "aws_instance" "ubuntu_instance" {
-  ami           = "ami-xxxxxxxx"  
+  ami           = ""   ##ami-name
   instance_type = "t2.micro"
-  key_name      = "your-key-pair-name"
+  key_name      = "" key-pair
   tags = {
     Name = "u21.local"
   }

@@ -1,4 +1,4 @@
-- name: Configure CentOS VM
+- name: Configure CentOS Instance
   hosts: c8.local
   become: true
   tasks:
@@ -12,7 +12,7 @@
         state: stopped
         enabled: false
 
-- name: Configure Ubuntu VM
+- name: Configure Ubuntu Instance
   hosts: u21.local
   become: true
   tasks:

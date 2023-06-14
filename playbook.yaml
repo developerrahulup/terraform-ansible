@@ -1,0 +1,44 @@
+- name: Configure CentOS VM
+  hosts: c8.local
+  become: true
+  tasks:
+    - name: Disable SELinux
+      selinux:
+        state: disabled
+
+    - name: Disable Firewalld
+      service:
+        name: firewalld
+        state: stopped
+        enabled: false
+
+- name: Configure Ubuntu VM
+  hosts: u21.local
+  become: true
+  tasks:
+    - name: Install Netdata
+      apt:
+        name: netdata
+        state: present
+
+- name: Configure frontend group
+  hosts: c8.local
+  become: true
+  tasks:
+    - name: Install and configure Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Configure Nginx as reverse proxy
+      copy:
+        src: nginx.conf
+        dest: /etc/nginx/nginx.conf
+      notify:
+        - Restart Nginx
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
